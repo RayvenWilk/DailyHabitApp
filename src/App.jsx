@@ -1,11 +1,21 @@
+
 import { useState } from "react";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
   const [newHabit, setNewHabit] = useState("");
 
+  const MAX_FREE_HABITS = 3;
+
   const addHabit = () => {
     if (!newHabit) return;
+
+    // Simple paywall
+    if (habits.length >= MAX_FREE_HABITS) {
+      alert("Free users can only add 3 habits. Upgrade to Premium for unlimited habits.");
+      return;
+    }
+
     setHabits([...habits, { name: newHabit, done: false }]);
     setNewHabit("");
   };
@@ -58,8 +68,26 @@ export default function App() {
       </div>
 
       <div style={{ marginTop: 20, fontSize: 12, color: "gray" }}>
-        Monetization idea: Freemium model with premium features later
+        Free plan: up to 3 habits. Upgrade for unlimited tracking.
       </div>
+
+      {/* 💰 STRIPE BUTTON */}
+      <button
+        onClick={() => window.location.href = "https://buy.stripe.com/test_eVqaEX7nt70a6Zfdnf63K00"}
+        style={{
+          marginTop: 12,
+          padding: "12px 16px",
+          backgroundColor: "#4CAF50",
+          color: "white",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+          fontSize: "16px",
+          width: "100%"
+        }}
+      >
+        Upgrade to Premium ($5/month)
+      </button>
     </div>
   );
 }
