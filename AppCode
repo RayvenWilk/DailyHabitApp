@@ -1,8 +1,4 @@
-
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
@@ -21,32 +17,50 @@ export default function App() {
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Daily Habit Builder</h1>
+    <div style={{ padding: 24, maxWidth: 500, margin: "0 auto", fontFamily: "Arial" }}>
+      <h1 style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>
+        Daily Habit Builder
+      </h1>
 
-      <div className="flex gap-2 mb-4">
-        <Input
+      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+        <input
+          style={{ flex: 1, padding: 8 }}
           placeholder="Add a habit..."
           value={newHabit}
           onChange={(e) => setNewHabit(e.target.value)}
         />
-        <Button onClick={addHabit}>Add</Button>
+        <button
+          onClick={addHabit}
+          style={{ padding: "8px 12px", cursor: "pointer" }}
+        >
+          Add
+        </button>
       </div>
 
-      <div className="grid gap-3">
+      <div>
         {habits.map((habit, i) => (
-          <Card key={i} className="cursor-pointer" onClick={() => toggleHabit(i)}>
-            <CardContent className="p-4 flex justify-between">
-              <span>{habit.name}</span>
-              <span>{habit.done ? "✅" : "⬜"}</span>
-            </CardContent>
-          </Card>
+          <div
+            key={i}
+            onClick={() => toggleHabit(i)}
+            style={{
+              border: "1px solid #ccc",
+              padding: 12,
+              marginBottom: 8,
+              cursor: "pointer",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>{habit.name}</span>
+            <span>{habit.done ? "✅" : "⬜"}</span>
+          </div>
         ))}
       </div>
 
-      <div className="mt-6 text-sm text-gray-500">
-        Monetization idea: Freemium model with premium analytics, reminders, and streak tracking.
+      <div style={{ marginTop: 20, fontSize: 12, color: "gray" }}>
+        Monetization idea: Freemium model with premium features later
       </div>
     </div>
   );
 }
+``
